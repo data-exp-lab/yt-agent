@@ -94,3 +94,13 @@ import yt
 
 \`\`\`
 ```
+
+## Cost Optimization (Context Caching)
+
+As your knowledge base grows, sending all documentation with every query can become expensive. This agent automatically uses **Gemini Context Caching** to minimize costs.
+
+1.  On startup, the agent checks if the current knowledge base matches an existing cache in your Google Cloud project.
+2.  **If a match is found:** It reuses the cache. You **do not pay** for ingestion again. You only pay for the query tokens.
+3.  **If no match is found:** It uploads the knowledge base and creates a new cache (valid for 2 hours).
+
+This means repeated runs or interactive sessions share the same "brain" without re-uploading data, making it efficient for analyzing multiple datasets in sequence.

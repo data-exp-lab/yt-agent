@@ -71,7 +71,7 @@ def main():
     # --- Mode: Agent Execution (Standard) ---
     print("Initializing yt Agent...")
     try:
-        agent = YtAgent(model_name="gemini-pro")
+        agent = YtAgent(model_name="gemini-2.0-flash-001")
         print(
             f"Loaded knowledge base from: {agent.knowledge_base_dir if hasattr(agent, 'knowledge_base_dir') else 'local resources'}"
         )
