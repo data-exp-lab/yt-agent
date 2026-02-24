@@ -29,6 +29,11 @@ def main():
         action="store_true",
         help="Automatically execute generated code.",
     )
+    parser.add_argument(
+        "--tui",
+        action="store_true",
+        help="Use Textual TUI (Terminal User Interface).",
+    )
 
     # Knowledge Base arguments
     parser.add_argument(
@@ -83,7 +88,26 @@ def main():
         agent.run(args.query, auto_execute=args.execute)
         return
 
-    if args.interactive or not args.query:
+    # Interactive Mode (CLI or TUI)
+    if args.interactive or args.tui or not args.query:
+        # Try launching TUI if requested
+        if args.tui:
+            try:
+                from yt_agent.tui import YtAgentApp
+
+                print("Launching TUI...")
+                app = YtAgentApp(agent=agent)
+                app.run()
+                return
+            except ImportError:
+                print(
+                    "Error: 'textual' library not found. Install it with `pip install textual`."
+                )
+                print("Falling back to standard CLI mode...")
+            except Exception as e:
+                print(f"Error launching TUI: {e}")
+                print("Falling back to standard CLI mode...")
+
         print("\n--- yt Agent Interactive Mode ---")
         print("Type your query (or 'exit' to quit).")
         while True:
