@@ -1,0 +1,7 @@
+[project]
+name = "yt-agent-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["google-adk>=1.25.1", "google-genai>=1.64.0", "yt>=4.0.0"]
